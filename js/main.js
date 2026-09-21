@@ -18,7 +18,7 @@
 const CONFIG = {
   whatsapp: "595XXXXXXXXX",  // número completo, solo dígitos, con código de país (595)
   instagram: "#",            // URL completa del perfil
-  marca: "RVH Ollas"         // nombre usado en los mensajes de WhatsApp
+  marca: "RVH Ollas"         // MARCA 7/7 · nombre usado en los mensajes de WhatsApp
 };
 
 

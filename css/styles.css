@@ -333,6 +333,7 @@ p { text-wrap: pretty; }
   inset: var(--alto-cab) 0 auto 0;
   background: var(--hierro);
   border-bottom: 1px solid var(--borde-oscuro);
+  box-shadow: 0 26px 44px -26px rgba(0, 0, 0, .9);
   padding: 12px var(--aire) 32px;
   visibility: hidden;
   opacity: 0;
@@ -363,6 +364,7 @@ p { text-wrap: pretty; }
     gap: 34px;
     background: none;
     border: 0;
+    box-shadow: none;
     padding: 0;
     visibility: visible;
     opacity: 1;
