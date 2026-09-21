@@ -105,20 +105,21 @@ grep -rn "RVH Ollas" index.html js/main.js
 | # | Archivo | Línea | Qué es |
 |---|---------|-------|--------|
 | 1 | `index.html` | 8 | `<title>` — pestaña del navegador y resultado de búsqueda |
-| 2 | `index.html` | 12 | `<meta name="description">` — descripción para buscadores |
-| 3 | `index.html` | 19 | `<meta property="og:title">` — título al compartir el link |
-| 4 | `index.html` | 24 | `<meta property="og:site_name">` — nombre del sitio en redes |
-| 5 | `index.html` | 52 | logo tipográfico del **header** (`.logo__texto`) |
-| 6 | `index.html` | 440 | logo tipográfico del **footer** (`.pie__marca .logo__texto`) |
+| 2 | `index.html` | 11 | `<meta name="description">` — descripción para buscadores |
+| 3 | `index.html` | 17 | `<meta property="og:title">` — título al compartir el link |
+| 4 | `index.html` | 22 | `<meta property="og:site_name">` — nombre del sitio en redes |
+| 5 | `index.html` | 47 | logo tipográfico del **header** (`.marca__texto`) |
+| 6 | `index.html` | 384 | logo tipográfico del **footer** (`.pie__marca`) |
 | 7 | `js/main.js` | 21 | `CONFIG.marca` — nombre que aparece en los mensajes de WhatsApp |
 
 Cambiando esos siete valores la marca queda renombrada en todo el sitio. No hay
 nombre escondido en el CSS ni en los textos de las secciones.
 
-**El logo es tipográfico**, no una imagen: es texto en Fraunces con un punto
-cobre-brasa al lado (`.logo__brasa`, dibujado con CSS). Por eso un nombre nuevo
-entra sin rehacer ningún archivo gráfico. Si el nombre nuevo es mucho más largo,
-podés ajustar `font-size` en `.logo__texto` dentro de `css/styles.css`.
+**El logo es tipográfico**, no una imagen: es el nombre en Cormorant Garamond,
+en mayúsculas y con mucho espaciado entre letras (`.marca__texto`). Por eso un
+nombre nuevo entra sin rehacer ningún archivo gráfico. Si el nombre nuevo es
+bastante más largo, ajustá `font-size` o `letter-spacing` en `.marca__texto`
+dentro de `css/styles.css`.
 
 El favicon también es propio: un SVG inline en el `<link rel="icon">` del
 `<head>`, sin archivo externo.
@@ -139,15 +140,21 @@ El favicon también es propio: un SVG inline en el `<link rel="icon">` del
 > poder armar y revisar el diseño. Reemplazalos por los renders 3D definitivos
 > **manteniendo los mismos nombres de archivo**; no hay que tocar el HTML.
 
-Para que no se vea un recorte feo, los renders no van sueltos sobre el fondo:
-van a sangre dentro de una tarjeta clara (`.marco`) y se funden con
-`mix-blend-mode: multiply`, así el gris del render se mezcla con el crema de la
-tarjeta. Conviene que los renders nuevos mantengan ese fondo gris claro y una
-relación de 4:3.
+Para que no se vea un recorte feo, los renders no van sueltos sobre el fondo ni
+dentro de una tarjeta con borde: ocupan todo el ancho de una superficie clara
+(`.plato`), se funden con `mix-blend-mode: multiply` y se desvanecen hacia
+arriba y hacia abajo con una máscara. El gris del render se mezcla con el crema
+y no queda ningún borde recto a la vista.
 
-Si cambiás la relación de aspecto, actualizá los atributos `width` y `height` de
-los `<img>` en `index.html`: están puestos para reservar el espacio y evitar que
-la página salte mientras carga.
+Conviene que los renders nuevos mantengan el fondo gris claro y una relación de
+4:3, con el producto centrado y con aire arriba y abajo (la máscara desvanece
+más o menos el 13% superior e inferior). Si cambiás la relación de aspecto,
+actualizá los atributos `width` y `height` de los `<img>` en `index.html`.
+
+La sección **Origen** usa `img/olla-tapa.png` recortada en vertical para mostrar
+el sostén de lapacho de cerca. El recorte se controla con `object-position` y
+`transform: scale()` en `.plato--retrato`; si el render nuevo tiene el producto
+en otra posición, ese es el lugar para ajustarlo.
 
 ---
 
@@ -156,32 +163,34 @@ la página salte mientras carga.
 Toda la paleta está en variables CSS, arriba de todo en `css/styles.css`:
 
 ```css
---hierro:      #1C1B1A   /* negro hierro, fondos oscuros    */
---carbon:      #262422   /* superficies sobre el negro      */
---brasa:       #B5541C   /* cobre-brasa, acento principal   */
---brasa-claro: #D9772F   /* acento sobre fondo oscuro       */
---brasa-oscuro:#9A4514   /* acento sobre fondo claro        */
---crema:       #F4EDE8   /* crema cálido, fondos claros     */
---lapacho:     #8C5A34   /* madera de lapacho, detalles     */
+--tinta:        #14120F   /* negro hierro, cálido            */
+--tinta-2:      #1C1915   /* segundo plano oscuro            */
+--brasa:        #A85A24   /* cobre-brasa, acento             */
+--brasa-clara:  #C2763A   /* acento sobre fondo oscuro       */
+--brasa-oscura: #8F4718   /* acento sobre fondo claro        */
+--hueso:        #EFEAE2   /* crema cálido, fondos claros     */
+--hueso-2:      #E7E0D6   /* crema con más cuerpo            */
+--lapacho:      #7A4A2B   /* madera de lapacho, detalles     */
 ```
 
 Cada sección declara si es clara u oscura con las clases `.seccion--clara` y
-`.seccion--oscura`, y a partir de ahí se resuelven solos el color de texto, el
-de acento, los bordes y el color del foco. Para dar vuelta una sección alcanza
-con cambiarle la clase.
+`.seccion--oscura`, y a partir de ahí se resuelven solos el color de fondo, el
+de texto, el de acento, las líneas y el color del foco. Para dar vuelta una
+sección alcanza con cambiarle la clase.
 
-Las tipografías se cargan en una sola etiqueta `<link>` del `<head>`: **Fraunces**
-para los títulos e **Inter** para el texto. Se cambian ahí y en las variables
-`--serif` y `--sans`.
+Las tipografías se cargan en una sola etiqueta `<link>` del `<head>`:
+**Cormorant Garamond** para los títulos y **Jost** para el texto y las
+versalitas. Se cambian ahí y en las variables `--display` y `--sans`.
 
 ---
 
 ## Decisiones que conviene conocer
 
-- **Accesibilidad**: HTML semántico, enlace "Saltar al contenido", menú
-  hamburguesa con `aria-expanded` que se cierra con `Escape` y devuelve el foco,
-  foco visible en todos los controles, textos alternativos en las imágenes y
-  contraste AA en texto y acentos.
+- **Accesibilidad**: HTML semántico, enlace "Saltar al contenido", menú a
+  pantalla completa con `aria-expanded` que lleva el foco al primer enlace, se
+  cierra con `Escape` y devuelve el foco al botón; foco visible en todos los
+  controles, textos alternativos en las imágenes y contraste AA en texto y
+  acentos.
 - **Animaciones**: las secciones aparecen al hacer scroll con
   `IntersectionObserver`. Si el sistema tiene activado *reducir movimiento*
   (`prefers-reduced-motion`), no se anima nada y todo se ve de entrada.
@@ -191,5 +200,17 @@ para los títulos e **Inter** para el texto. Se cambian ahí y en las variables
   todas tienen `width` y `height` para que no salte el layout.
 - **Mobile first**: probado de 360 px hasta 1920 px, sin scroll horizontal en
   ningún ancho.
-- **Sin precios**: el sitio no muestra precios; todo lleva a consultar por
-  WhatsApp.
+- **Sin precios ni fichas técnicas**: el sitio no muestra precios ni pesos ni
+  medidas; todo lleva a consultar por WhatsApp.
+- **La colección puede crecer**: no hay nada en los textos que dé a entender que
+  son solo dos piezas. Para sumar una, copiá un bloque `<article class="pieza">`
+  en `index.html`, alterná la clase `pieza--invertida` para que la foto cambie
+  de lado, y agregá la opción al `<select>` de contacto.
+
+## Qué falta
+
+El sitio está terminado como diseño. Lo que queda por cargar son datos reales:
+
+1. El número de WhatsApp y la URL de Instagram en `CONFIG` (`js/main.js`).
+2. Los renders 3D definitivos en `img/`.
+3. Repasar los textos de cada pieza con la información final.

@@ -4,11 +4,11 @@
    01. CONFIG — datos editables del sitio
    02. WhatsApp e Instagram
    03. Año del footer
-   04. Menú móvil
+   04. Menú a pantalla completa
    05. Header al hacer scroll
-   06. Galería de la olla
+   06. Vistas de la olla
    07. Formulario de contacto
-   08. Aparición de secciones (IntersectionObserver)
+   08. Revelado al hacer scroll
    ========================================================================== */
 
 /* ============================================================
@@ -25,12 +25,10 @@ const CONFIG = {
 (function () {
   "use strict";
 
-  // El CSS solo oculta las secciones animadas si el JS está vivo.
   document.documentElement.classList.add("js");
 
   const $  = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
-
   const menosMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 
@@ -38,14 +36,14 @@ const CONFIG = {
      02. WHATSAPP E INSTAGRAM
      ============================================================ */
 
-  // El placeholder de CONFIG.whatsapp no es un número válido: mientras no se
-  // reemplace, los botones siguen llevando al formulario de contacto.
+  // Mientras CONFIG.whatsapp sea el placeholder, los enlaces llevan al
+  // formulario en vez de abrir un chat roto.
   const hayWhatsapp = /^\d{8,15}$/.test(CONFIG.whatsapp);
 
-  function mensajeDe(producto) {
-    return producto === "Consulta general"
+  function mensajeDe(pieza) {
+    return pieza === "Consulta general"
       ? "Hola " + CONFIG.marca + ", quiero hacer una consulta."
-      : "Hola " + CONFIG.marca + ", quiero consultar por: " + producto + ".";
+      : "Hola " + CONFIG.marca + ", quiero consultar por: " + pieza + ".";
   }
 
   function enlaceWhatsapp(texto) {
@@ -79,45 +77,42 @@ const CONFIG = {
 
 
   /* ============================================================
-     04. MENÚ MÓVIL
+     04. MENÚ A PANTALLA COMPLETA
      ============================================================ */
-  const cab = $("#cab");
+  const raiz = document.documentElement;
   const botonMenu = $("#btn-menu");
   const menu = $("#menu");
 
   function abrirMenu(abrir) {
-    cab.classList.toggle("menu-abierto", abrir);
+    raiz.classList.toggle("menu-abierto", abrir);
     botonMenu.setAttribute("aria-expanded", String(abrir));
     botonMenu.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+    if (abrir) {
+      // El panel recién es enfocable cuando el navegador aplicó el estilo.
+      window.requestAnimationFrame(function () {
+        const primero = $("a", menu);
+        if (primero) primero.focus();
+      });
+    }
   }
 
   if (botonMenu && menu) {
     botonMenu.addEventListener("click", function () {
-      abrirMenu(!cab.classList.contains("menu-abierto"));
+      abrirMenu(!raiz.classList.contains("menu-abierto"));
     });
 
-    // Cerrar al elegir una sección
     $$("a", menu).forEach(function (enlace) {
       enlace.addEventListener("click", function () { abrirMenu(false); });
     });
 
-    // Cerrar con Escape y devolver el foco al botón
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && cab.classList.contains("menu-abierto")) {
+      if (e.key === "Escape" && raiz.classList.contains("menu-abierto")) {
         abrirMenu(false);
         botonMenu.focus();
       }
     });
 
-    // Cerrar al tocar fuera del header
-    document.addEventListener("click", function (e) {
-      if (cab.classList.contains("menu-abierto") && !cab.contains(e.target)) {
-        abrirMenu(false);
-      }
-    });
-
-    // Al pasar a escritorio el panel deja de existir como tal
-    window.matchMedia("(min-width: 960px)").addEventListener("change", function (e) {
+    window.matchMedia("(min-width: 900px)").addEventListener("change", function (e) {
       if (e.matches) abrirMenu(false);
     });
   }
@@ -126,42 +121,35 @@ const CONFIG = {
   /* ============================================================
      05. HEADER AL HACER SCROLL
      ============================================================ */
+  const cab = $("#cab");
   let pendiente = false;
   function marcarScroll() {
-    cab.classList.toggle("esta-fija", window.scrollY > 12);
+    cab.classList.toggle("esta-fija", window.scrollY > 24);
     pendiente = false;
   }
   window.addEventListener("scroll", function () {
-    if (!pendiente) {
-      pendiente = true;
-      window.requestAnimationFrame(marcarScroll);
-    }
+    if (!pendiente) { pendiente = true; window.requestAnimationFrame(marcarScroll); }
   }, { passive: true });
   marcarScroll();
 
 
   /* ============================================================
-     06. GALERÍA DE LA OLLA
+     06. VISTAS DE LA OLLA
      ============================================================ */
-  const ollaImg = $("#olla-principal");
-  const ollaPie = $("#olla-pie");
-  const miniaturas = $$(".galeria__miniatura");
+  const ollaImg = $("#olla-img");
+  const vistas = $$(".vista");
 
-  function mostrarVista(boton) {
-    if (!ollaImg || boton.classList.contains("es-activa")) return;
-    ollaImg.src = boton.dataset.img;
-    ollaImg.alt = boton.dataset.alt;
-    if (ollaPie) ollaPie.textContent = boton.dataset.pie;
-    miniaturas.forEach(function (otro) {
-      const activo = otro === boton;
-      otro.classList.toggle("es-activa", activo);
-      otro.setAttribute("aria-pressed", String(activo));
+  vistas.forEach(function (boton) {
+    boton.addEventListener("click", function () {
+      if (!ollaImg || boton.classList.contains("es-activa")) return;
+      ollaImg.src = boton.dataset.img;
+      ollaImg.alt = boton.dataset.alt;
+      vistas.forEach(function (otro) {
+        const activo = otro === boton;
+        otro.classList.toggle("es-activa", activo);
+        otro.setAttribute("aria-pressed", String(activo));
+      });
     });
-  }
-
-  miniaturas.forEach(function (boton) {
-    boton.addEventListener("click", function () { mostrarVista(boton); });
-    boton.addEventListener("mouseenter", function () { mostrarVista(boton); });
   });
 
 
@@ -174,9 +162,9 @@ const CONFIG = {
     const estado = $("#form-estado");
 
     const reglas = [
-      { id: "nombre",   error: "Escribí tu nombre para saber con quién hablamos.", valido: function (v) { return v.trim().length >= 2; } },
-      { id: "producto", error: "Elegí qué te interesa.",                           valido: function (v) { return v !== ""; } },
-      { id: "mensaje",  error: "Contanos un poco más (al menos 5 caracteres).",    valido: function (v) { return v.trim().length >= 5; } }
+      { id: "nombre",  error: "Escribinos tu nombre.",            valido: function (v) { return v.trim().length >= 2; } },
+      { id: "pieza",   error: "Elegí una opción.",                valido: function (v) { return v !== ""; } },
+      { id: "mensaje", error: "Contanos un poco más.",            valido: function (v) { return v.trim().length >= 5; } }
     ];
 
     function marcarCampo(regla, ok) {
@@ -187,14 +175,12 @@ const CONFIG = {
       aviso.textContent = ok ? "" : regla.error;
     }
 
-    // Al corregir, se limpia el error del campo
     reglas.forEach(function (regla) {
       const input = $("#" + regla.id);
-      input.addEventListener("input", function () {
-        if (regla.valido(input.value)) marcarCampo(regla, true);
-      });
-      input.addEventListener("change", function () {
-        if (regla.valido(input.value)) marcarCampo(regla, true);
+      ["input", "change"].forEach(function (evento) {
+        input.addEventListener(evento, function () {
+          if (regla.valido(input.value)) marcarCampo(regla, true);
+        });
       });
     });
 
@@ -226,7 +212,7 @@ const CONFIG = {
 
       const texto =
         "Hola " + CONFIG.marca + ", soy " + $("#nombre").value.trim() + ".\n" +
-        "Me interesa: " + $("#producto").value + ".\n" +
+        "Me interesa: " + $("#pieza").value + ".\n" +
         $("#mensaje").value.trim();
 
       window.open(enlaceWhatsapp(texto), "_blank", "noopener");
@@ -237,17 +223,16 @@ const CONFIG = {
 
 
   /* ============================================================
-     08. APARICIÓN DE SECCIONES
+     08. REVELADO AL HACER SCROLL
      ============================================================ */
-  const animables = $$("[data-animar]");
+  const revelables = $$("[data-revelar]");
 
   if (menosMovimiento.matches || !("IntersectionObserver" in window)) {
-    animables.forEach(function (el) { el.classList.add("es-visible"); });
+    revelables.forEach(function (el) { el.classList.add("es-visible"); });
   } else {
-    // Pequeño escalonado dentro de los grupos
-    $$(".razones, .pasos, .origen__puntos").forEach(function (grupo) {
-      $$("[data-animar]", grupo).forEach(function (el, i) {
-        el.style.transitionDelay = (i * 80) + "ms";
+    $$(".notas, .pasos, .apuntes").forEach(function (grupo) {
+      $$("[data-revelar]", grupo).forEach(function (el, i) {
+        el.style.transitionDelay = (i * 90) + "ms";
       });
     });
 
@@ -258,9 +243,9 @@ const CONFIG = {
           observador.unobserve(entrada.target);
         }
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.1 });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.08 });
 
-    animables.forEach(function (el) { observador.observe(el); });
+    revelables.forEach(function (el) { observador.observe(el); });
   }
 
 })();
