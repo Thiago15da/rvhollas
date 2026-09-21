@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- MARCA 1/6 · título del navegador y resultado de búsqueda -->
+<title>RVH Ollas · Hierro fundido hecho en Paraguay</title>
+
+<!-- SEO -->
+<!-- MARCA 2/6 -->
+<meta name="description" content="RVH Ollas: ollas y grills de hierro fundido fabricados en Paraguay. Piezas macizas para la hornalla, el horno y la parrilla, con sostén de lapacho.">
+<meta name="theme-color" content="#1C1B1A">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="./">
+
+<!-- Open Graph / redes -->
+<!-- MARCA 3/6 -->
+<meta property="og:title" content="RVH Ollas · Hierro fundido hecho en Paraguay">
+<meta property="og:description" content="Ollas y grills de hierro fundido fundidos en Paraguay. Para la hornalla, el horno y la parrilla.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_PY">
+<!-- MARCA 4/6 -->
+<meta property="og:site_name" content="RVH Ollas">
+<meta property="og:image" content="img/olla-tapa.png">
+<meta property="og:image:alt" content="Olla de hierro fundido con tapa y sostén de lapacho">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon SVG inline (sin archivo externo) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C1B1A'/%3E%3Cpath d='M15 27h34v13c0 7.2-5.8 13-13 13h-8c-7.2 0-13-5.8-13-13V27z' fill='%23B5541C'/%3E%3Crect x='10' y='21' width='44' height='6.5' rx='3.25' fill='%23F4EDE8'/%3E%3Crect x='28' y='11' width='8' height='7' rx='3.5' fill='%238C5A34'/%3E%3C/svg%3E">
+
+<!-- Único recurso externo permitido: Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600&display=swap">
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="cab" id="cab">
+  <div class="cab__barra contenedor">
+
+    <a class="logo" href="#inicio" aria-label="Ir al inicio">
+      <span class="logo__brasa" aria-hidden="true"></span>
+      <!-- MARCA 5/6 · logo tipográfico -->
+      <span class="logo__texto">RVH Ollas</span>
+    </a>
+
+    <button class="hamburguesa" id="btn-menu" type="button"
+            aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+      <span class="hamburguesa__linea" aria-hidden="true"></span>
+      <span class="hamburguesa__linea" aria-hidden="true"></span>
+      <span class="hamburguesa__linea" aria-hidden="true"></span>
+    </button>
+
+    <nav class="menu" id="menu" aria-label="Navegación principal">
+      <ul class="menu__lista">
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#hierro">Hierro fundido</a></li>
+        <li><a href="#cuidado">Cuidado</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn btn--brasa btn--chico menu__cta" href="#contacto">Consultar</a>
+    </nav>
+
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero seccion--oscura" id="inicio">
+    <div class="contenedor hero__grilla">
+
+      <div class="hero__texto">
+        <p class="antetitulo" data-animar>Fundición paraguaya</p>
+        <h1 class="hero__titulo" data-animar>
+          Hierro fundido hecho en Paraguay, para toda la vida
+        </h1>
+        <p class="hero__bajada" data-animar>
+          Piezas macizas, fundidas y terminadas a mano acá. Van de la hornalla
+          al horno y a la parrilla, y se pasan de una generación a la otra.
+        </p>
+        <div class="hero__acciones" data-animar>
+          <a class="btn btn--brasa" href="#productos">Ver productos</a>
+          <a class="btn btn--linea" href="#contacto" data-wa="Consulta general">Escribinos por WhatsApp</a>
+        </div>
+        <ul class="hero__notas" data-animar>
+          <li>Fundido en Paraguay</li>
+          <li>Sostén de lapacho</li>
+          <li>Hornalla, horno y parrilla</li>
+        </ul>
+      </div>
+
+      <div class="hero__foto" data-animar>
+        <div class="marco">
+          <img src="img/olla-tapa.png"
+               alt="Olla de hierro fundido de boca ancha con su tapa apoyada y sostén de lapacho"
+               width="1200" height="900" fetchpriority="high" decoding="async">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCTOS
+       ============================================================ -->
+  <section class="seccion seccion--clara" id="productos">
+    <div class="contenedor">
+
+      <header class="seccion__cab" data-animar>
+        <p class="antetitulo">Productos</p>
+        <h2>Dos piezas para empezar</h2>
+        <p class="seccion__bajada">
+          Por ahora hacemos dos. Cada una sale de su propio molde, se enfría
+          despacio y se termina a mano, una por una.
+        </p>
+      </header>
+
+      <!-- Ficha: grill rectangular -->
+      <article class="producto" data-animar>
+        <div class="producto__foto">
+          <div class="marco">
+            <img src="img/grill.png"
+                 alt="Grill rectangular de hierro fundido visto desde arriba: marco perimetral, asas integradas, nervaduras curvas y zona central ranurada"
+                 width="1200" height="900" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="producto__info">
+          <p class="antetitulo">Parrilla, hornalla y horno</p>
+          <h3>Grill rectangular</h3>
+          <p>
+            Una placa maciza con marco perimetral y asas integradas, para
+            levantarla con el repasador sin malabares. Las nervaduras curvas
+            marcan la carne y la zona ranurada del centro escurre la grasa,
+            así la comida se dora en vez de hervirse en su propio jugo.
+          </p>
+          <ul class="specs">
+            <li><span>Peso</span><strong>8,52 kg</strong></li>
+            <li><span>Superficie</span><strong>Nervaduras curvas + zona ranurada</strong></li>
+            <li><span>Asas</span><strong>Integradas al marco</strong></li>
+          </ul>
+          <a class="btn btn--brasa" href="#contacto" data-wa="Grill rectangular">Consultar por WhatsApp</a>
+        </div>
+      </article>
+
+      <!-- Ficha: olla con tapa -->
+      <article class="producto producto--invertido" data-animar>
+        <div class="producto__foto">
+          <div class="marco">
+            <img id="olla-principal" src="img/olla-tapa.png"
+                 alt="Olla de hierro fundido con su tapa puesta y el sostén de lapacho"
+                 width="1200" height="900" loading="lazy" decoding="async">
+          </div>
+          <div class="galeria" role="group" aria-label="Vistas de la olla con tapa">
+            <button class="galeria__miniatura es-activa" type="button" aria-pressed="true"
+                    data-img="img/olla-tapa.png"
+                    data-alt="Olla de hierro fundido con su tapa puesta y el sostén de lapacho"
+                    data-pie="Con la tapa puesta">
+              <img src="img/olla-tapa.png" alt="" width="1200" height="900" loading="lazy">
+              <span class="galeria__nombre">Con tapa</span>
+            </button>
+            <button class="galeria__miniatura" type="button" aria-pressed="false"
+                    data-img="img/olla.png"
+                    data-alt="Olla de hierro fundido sin la tapa, se ve la boca ancha y las asas laterales"
+                    data-pie="Sin tapa, boca ancha">
+              <img src="img/olla.png" alt="" width="1200" height="900" loading="lazy">
+              <span class="galeria__nombre">Sin tapa</span>
+            </button>
+          </div>
+          <p class="producto__pie" id="olla-pie" aria-live="polite">Con la tapa puesta</p>
+        </div>
+        <div class="producto__info">
+          <p class="antetitulo">Guisos, panes y fuego lento</p>
+          <h3>Olla con tapa</h3>
+          <p>
+            Perfil bajo y boca ancha: entra la cuchara, entra la mano y el
+            guiso se cocina parejo. Dos asas laterales integradas y una tapa
+            pesada que sella el vapor, con sostén de lapacho para agarrarla
+            sin quemarse.
+          </p>
+          <ul class="specs">
+            <li><span>Cuerpo</span><strong>2,90 kg</strong></li>
+            <li><span>Tapa</span><strong>1,49 kg</strong></li>
+            <li><span>Total</span><strong>4,39 kg</strong></li>
+            <li><span>Sostén</span><strong>Lapacho macizo</strong></li>
+          </ul>
+          <a class="btn btn--brasa" href="#contacto" data-wa="Olla con tapa">Consultar por WhatsApp</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       POR QUÉ HIERRO FUNDIDO
+       ============================================================ -->
+  <section class="seccion seccion--oscura" id="hierro">
+    <div class="contenedor">
+
+      <header class="seccion__cab" data-animar>
+        <p class="antetitulo">Por qué hierro fundido</p>
+        <h2>El material hace la mitad del trabajo</h2>
+      </header>
+
+      <ul class="razones">
+        <li class="razon" data-animar>
+          <span class="razon__num" aria-hidden="true">01</span>
+          <h3>Guarda y reparte el calor</h3>
+          <p>
+            Tarda en calentarse y después no lo suelta. El calor llega parejo
+            a todo el fondo, sin puntos fríos: la carne sella de verdad y la
+            temperatura no se cae cuando echás algo frío.
+          </p>
+        </li>
+        <li class="razon" data-animar>
+          <span class="razon__num" aria-hidden="true">02</span>
+          <h3>Dura generaciones</h3>
+          <p>
+            No hay antiadherente que se descascare ni mango que se afloje. Es
+            una sola pieza de hierro: bien cuidada, la olla que comprás hoy la
+            van a seguir usando tus nietos.
+          </p>
+        </li>
+        <li class="razon" data-animar>
+          <span class="razon__num" aria-hidden="true">03</span>
+          <h3>Hornalla, horno y parrilla</h3>
+          <p>
+            Va a la hornalla, al horno, a la brasa y al fuego de leña. Empezás
+            el sofrito arriba y terminás la cocción abajo, en la misma pieza,
+            sin cambiar de recipiente.
+          </p>
+        </li>
+        <li class="razon" data-animar>
+          <span class="razon__num" aria-hidden="true">04</span>
+          <h3>Mejora con el uso</h3>
+          <p>
+            Cada cocción deja una capa finita de aceite polimerizado. Con los
+            meses la superficie se vuelve oscura, lisa y antiadherente de
+            verdad. Es de las pocas cosas que se ponen mejor con los años.
+          </p>
+        </li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HECHO EN PARAGUAY
+       ============================================================ -->
+  <section class="seccion seccion--clara seccion--paraguay" id="origen">
+    <div class="contenedor origen">
+
+      <div class="origen__cab" data-animar>
+        <p class="antetitulo">Hecho en Paraguay</p>
+        <h2>Fundido acá, con manos de acá</h2>
+      </div>
+
+      <div class="origen__cuerpo" data-animar>
+        <p>
+          Cada pieza nace en una fundición paraguaya. El hierro se funde, se
+          cuela en el molde, se enfría despacio y se termina a mano: se rebaja
+          la rebaba, se alisa la superficie y recién ahí pasa el control. No
+          importamos piezas armadas ni mandamos a terminar afuera.
+        </p>
+        <p>
+          El sostén de la tapa es de lapacho, madera nativa dura y densa que
+          aguanta bien el calor y envejece lindo. Se trabaja aparte, se lija
+          fino y se monta al final, pieza por pieza.
+        </p>
+      </div>
+
+      <ul class="origen__puntos">
+        <li data-animar><strong>Fundición local</strong><span>Molde, colado y terminación en el país.</span></li>
+        <li data-animar><strong>Lapacho nativo</strong><span>Madera dura, trabajada y aceitada a mano.</span></li>
+        <li data-animar><strong>Pieza por pieza</strong><span>Cada olla se revisa antes de salir.</span></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CUIDADO Y USO
+       ============================================================ -->
+  <section class="seccion seccion--oscura" id="cuidado">
+    <div class="contenedor">
+
+      <header class="seccion__cab" data-animar>
+        <p class="antetitulo">Cuidado y uso</p>
+        <h2>Cuidarlo es más fácil de lo que dicen</h2>
+        <p class="seccion__bajada">
+          Cuatro pasos y listo. Nada de productos especiales: agua caliente,
+          un poco de aceite y secarlo bien.
+        </p>
+      </header>
+
+      <ol class="pasos">
+        <li class="paso" data-animar>
+          <h3><span aria-hidden="true">1.</span> Curar</h3>
+          <p>
+            Lavá la pieza con agua tibia y una gota de detergente, y secala
+            bien. Pasale una capa finísima de aceite por dentro y por fuera
+            (girasol, coco o lino). Al horno a 200&nbsp;°C, boca abajo, una
+            hora. Dejala enfriar adentro. Repetí dos o tres veces y ya tenés
+            una base negra y pareja.
+          </p>
+        </li>
+        <li class="paso" data-animar>
+          <h3><span aria-hidden="true">2.</span> Limpiar</h3>
+          <p>
+            Mientras todavía está tibia, agua caliente y cepillo o esponja.
+            Si quedó algo pegado, sal gruesa como abrasivo y listo. Evitá el
+            lavavajillas, el remojo largo y los detergentes fuertes: se comen
+            la curación.
+          </p>
+        </li>
+        <li class="paso" data-animar>
+          <h3><span aria-hidden="true">3.</span> Secar</h3>
+          <p>
+            Secá enseguida con un repasador. Para quedarte tranquilo, ponela
+            dos minutos sobre la hornalla a fuego bajo hasta que no quede
+            nada de humedad. El hierro y el agua parada no se llevan.
+          </p>
+        </li>
+        <li class="paso" data-animar>
+          <h3><span aria-hidden="true">4.</span> Aceitar</h3>
+          <p>
+            Con la pieza todavía tibia, pasale una gota de aceite con papel
+            de cocina hasta que quede apenas satinada, nunca pegajosa.
+            Guardala destapada, o con un papel entre la tapa y el cuerpo para
+            que respire.
+          </p>
+        </li>
+      </ol>
+
+      <div class="aviso aviso--madera" data-animar>
+        <h3>El sostén de lapacho</h3>
+        <p>
+          La madera no va al agua ni al lavavajillas. Limpiala con un trapo
+          apenas húmedo y, cada tantos meses, pasale aceite mineral de grado
+          alimenticio o cera de abeja. En el horno no pases de unos
+          180&nbsp;°C: por encima de eso, cociná sin la tapa o desmontá el
+          sostén antes de meterla.
+        </p>
+      </div>
+
+      <p class="aviso aviso--nota" data-animar>
+        <strong>¿Apareció óxido?</strong> No pasa nada: frotá con esponja de
+        acero o un poco de vinagre rebajado, enjuagá, secá y volvé a curar la
+        pieza. El hierro fundido casi siempre vuelve.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACTO
+       ============================================================ -->
+  <section class="seccion seccion--clara" id="contacto">
+    <div class="contenedor contacto">
+
+      <div class="contacto__texto" data-animar>
+        <p class="antetitulo">Contacto</p>
+        <h2>Escribinos</h2>
+        <p>
+          Contanos qué pieza te interesa y te respondemos por WhatsApp con
+          disponibilidad, medidas y envíos. Completá el formulario y se abre
+          el chat con el mensaje ya escrito.
+        </p>
+        <ul class="contacto__datos">
+          <li>
+            <span>WhatsApp</span>
+            <a href="#contacto" data-wa="Consulta general" data-wa-texto>Abrir chat</a>
+          </li>
+          <li>
+            <span>Instagram</span>
+            <a href="#" data-instagram rel="noopener">Ver el trabajo</a>
+          </li>
+          <li>
+            <span>Dónde</span>
+            <strong>Paraguay</strong>
+          </li>
+        </ul>
+      </div>
+
+      <form class="form" id="form-contacto" novalidate data-animar>
+        <div class="campo">
+          <label for="nombre">Tu nombre</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name"
+                 required aria-describedby="error-nombre">
+          <p class="campo__error" id="error-nombre" hidden></p>
+        </div>
+
+        <div class="campo">
+          <label for="producto">¿Qué te interesa?</label>
+          <select id="producto" name="producto" required aria-describedby="error-producto">
+            <option value="">Elegí una opción</option>
+            <option>Grill rectangular</option>
+            <option>Olla con tapa</option>
+            <option>Las dos piezas</option>
+            <option>Otra consulta</option>
+          </select>
+          <p class="campo__error" id="error-producto" hidden></p>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Tu mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="4"
+                    placeholder="Contanos qué necesitás, desde dónde escribís…"
+                    required aria-describedby="error-mensaje"></textarea>
+          <p class="campo__error" id="error-mensaje" hidden></p>
+        </div>
+
+        <button class="btn btn--brasa btn--ancho" type="submit">Enviar por WhatsApp</button>
+        <p class="form__estado" id="form-estado" role="status"></p>
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="pie">
+  <div class="contenedor pie__grilla">
+    <div class="pie__marca">
+      <span class="logo__brasa" aria-hidden="true"></span>
+      <!-- MARCA 6/6 · logo tipográfico del pie -->
+      <span class="logo__texto">RVH Ollas</span>
+    </div>
+    <p class="pie__lema">Hecho en Paraguay · Hierro fundido y lapacho</p>
+    <ul class="pie__enlaces">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#cuidado">Cuidado</a></li>
+      <li><a href="#" data-instagram rel="noopener">Instagram</a></li>
+    </ul>
+    <p class="pie__legal">© <span id="anio">2026</span> · Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
