@@ -83,7 +83,7 @@
        ============================================================ -->
   <section class="hero" id="inicio">
     <div class="hero__texto">
-      <p class="etiqueta" data-revelar>Hierro fundido · Paraguay</p>
+      <p class="etiqueta" data-revelar>Hierro fundido · Producción 100% paraguaya</p>
       <h1 class="display hero__titulo" data-revelar>Hierro fundido<br>para toda una vida</h1>
       <p class="hero__bajada" data-revelar>
         Piezas fundidas y terminadas a mano en Paraguay. Van de la hornalla
@@ -103,6 +103,26 @@
   </section>
 
   <!-- ============================================================
+       FRANJA DE MARCA
+       ============================================================ -->
+  <section class="franja" aria-label="Cómo trabajamos">
+    <div class="contenedor franja__grilla">
+      <div class="franja__item" data-revelar>
+        <h2>Fundición propia</h2>
+        <p>El molde, el colado y la terminación pasan por nuestras manos, no por un proveedor.</p>
+      </div>
+      <div class="franja__item" data-revelar>
+        <h2>Producción 100% paraguaya</h2>
+        <p>Hierro fundido y lapacho nativo, trabajados enteramente dentro del país.</p>
+      </div>
+      <div class="franja__item" data-revelar>
+        <h2>Hecha para heredarse</h2>
+        <p>Una sola pieza de hierro, sin nada que se descascare ni se afloje con los años.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        COLECCIÓN
        ============================================================ -->
   <section class="coleccion" id="coleccion">
@@ -113,7 +133,7 @@
         <h2 class="display">Piezas hechas<br>para quedarse</h2>
         <p class="intro">
           Cada una sale de su propio molde, se enfría despacio y se termina a
-          mano. Ninguna sale sin que alguien la revise antes.
+          mano. Ninguna sale de la fundición sin que alguien la revise antes.
         </p>
       </header>
     </div>
@@ -215,10 +235,39 @@
           se revisa. Ninguna pieza sale sin pasar por ahí.
         </p>
         <p data-revelar>
-          La madera del sostén es lapacho, nativa, dura y densa. Aguanta el
-          calor, no se mueve y envejece bien. Se trabaja aparte y se monta al
-          final, pieza por pieza.
+          La producción es 100% paraguaya, de punta a punta. No importamos
+          piezas armadas ni mandamos a terminar afuera: el hierro se funde
+          acá y el lapacho del sostén es madera nativa, trabajada acá.
         </p>
+
+        <div class="sello-bloque" data-revelar>
+          <svg class="sello" viewBox="0 0 160 160" role="img"
+               aria-label="Sello: producción 100% paraguaya, fundición propia, terminado a mano.">
+            <defs>
+              <!-- Arco superior: recorre en sentido horario, el texto sale derecho -->
+              <path id="sello-arriba" d="M20,80 A60,60 0 0 1 140,80"/>
+              <!-- Arco inferior: recorre al revés, así el texto tampoco se da vuelta -->
+              <path id="sello-abajo" d="M11,80 A69,69 0 0 0 149,80"/>
+            </defs>
+            <circle class="sello__anillo" cx="80" cy="80" r="77"/>
+            <circle class="sello__anillo sello__anillo--fino" cx="80" cy="80" r="71"/>
+            <circle class="sello__anillo sello__anillo--fino" cx="80" cy="80" r="44"/>
+            <text class="sello__aro">
+              <textPath href="#sello-arriba" startOffset="50%" text-anchor="middle">FUNDICIÓN PROPIA</textPath>
+            </text>
+            <text class="sello__aro">
+              <textPath href="#sello-abajo" startOffset="50%" text-anchor="middle">TERMINADO A MANO</textPath>
+            </text>
+            <circle class="sello__punto" cx="14.5" cy="80" r="1.7"/>
+            <circle class="sello__punto" cx="145.5" cy="80" r="1.7"/>
+            <text class="sello__cifra" x="80" y="86" text-anchor="middle">100%</text>
+            <text class="sello__pie" x="80" y="103" text-anchor="middle">PARAGUAYA</text>
+          </svg>
+          <p>
+            Cada pieza se funde, se termina y se revisa en Paraguay,
+            una por una.
+          </p>
+        </div>
       </div>
 
       <figure class="origen__detalle" data-revelar>
@@ -382,7 +431,7 @@
   <div class="contenedor pie__grilla">
     <!-- MARCA 6/7 · logo tipográfico del pie -->
     <p class="marca__texto pie__marca">RVH Ollas</p>
-    <p class="pie__lema">Hecho en Paraguay</p>
+    <p class="pie__lema">Producción 100% paraguaya</p>
     <nav class="pie__nav" aria-label="Enlaces del pie">
       <a href="#coleccion">Colección</a>
       <a href="#cuidado">Cuidado</a>

@@ -29,6 +29,8 @@
   --hueso: #EFEAE2;          /* crema cálido, fondos claros */
   --hueso-2: #E7E0D6;        /* crema con más cuerpo */
   --brasa: #A85A24;          /* cobre-brasa */
+  --laton: #C9A46A;          /* latón, solo para el sello y las filetes */
+  --laton-2: #8A6A3C;
   --brasa-clara: #C2763A;    /* acento sobre fondo oscuro */
   --brasa-oscura: #8F4718;   /* acento sobre fondo claro */
   --lapacho: #7A4A2B;        /* madera de lapacho */
@@ -90,6 +92,20 @@ ul, ol { list-style: none; padding: 0; }
 :focus-visible { outline: 1px solid var(--foco); outline-offset: 5px; }
 ::selection { background: var(--brasa); color: #FFF8F1; }
 
+/* Grano finísimo sobre toda la página: le saca el plano digital a los
+   fondos planos y le da textura de impreso. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: .048;
+  mix-blend-mode: overlay;
+  background-size: 190px 190px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='190'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='190' height='190' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
 .saltar {
   position: fixed;
   left: 16px;
@@ -112,13 +128,13 @@ ul, ol { list-style: none; padding: 0; }
    ============================================================ */
 .display {
   font-family: var(--display);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.005em;
   text-wrap: balance;
 }
 
-h1.display { font-size: clamp(2.9rem, 8.4vw, 6rem); }
+h1.display { font-size: clamp(2.9rem, 8.4vw, 6rem); font-weight: 300; }
 h2.display { font-size: clamp(2.4rem, 6.4vw, 4.6rem); }
 h3.display { font-size: clamp(1.9rem, 4.4vw, 3.1rem); }
 
@@ -157,7 +173,9 @@ p { text-wrap: pretty; }
   --acento: var(--brasa-oscura);
   --linea: rgba(20, 18, 15, .16);
   --foco: var(--brasa-oscura);
-  background: var(--hueso);
+  background:
+    radial-gradient(130% 80% at 50% 0%, #F5F1EA 0%, var(--hueso) 58%),
+    var(--hueso);
   color: var(--texto);
 }
 
@@ -168,7 +186,9 @@ p { text-wrap: pretty; }
   --acento: var(--brasa-clara);
   --linea: rgba(239, 234, 226, .18);
   --foco: var(--brasa-clara);
-  background: var(--tinta);
+  background:
+    radial-gradient(120% 78% at 50% 0%, #221E19 0%, var(--tinta) 62%),
+    var(--tinta);
   color: var(--texto);
 }
 
@@ -184,6 +204,9 @@ p { text-wrap: pretty; }
 
 /* Enlace con marco fino */
 .borde {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -198,13 +221,20 @@ p { text-wrap: pretty; }
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color .5s ease, color .5s ease, border-color .5s ease;
+  transition: color .45s ease, border-color .5s ease;
 }
-.borde:hover {
+.borde::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: var(--texto);
-  border-color: var(--texto);
-  color: var(--fondo);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .6s cubic-bezier(.16, 1, .3, 1);
 }
+.borde:hover { border-color: var(--texto); color: var(--fondo); }
+.borde:hover::before { transform: scaleY(1); }
 
 /* Único botón sólido del sitio: el envío del formulario */
 .borde--lleno {
@@ -212,11 +242,8 @@ p { text-wrap: pretty; }
   border-color: var(--texto);
   color: var(--fondo);
 }
-.borde--lleno:hover {
-  background: var(--brasa);
-  border-color: var(--brasa);
-  color: #FFF8F1;
-}
+.borde--lleno::before { background: var(--brasa); }
+.borde--lleno:hover { border-color: var(--brasa); color: #FFF8F1; }
 
 /* Enlace subrayado que crece */
 .sub {
@@ -394,8 +421,19 @@ html.menu-abierto { overflow: hidden; }
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(66% 56% at 50% 26%, rgba(168, 90, 36, .13), transparent 72%),
-    linear-gradient(192deg, #F8F4EE 0%, #EFE9E0 46%, #E3DBD1 100%);
+    radial-gradient(48% 38% at 50% 20%, rgba(255, 252, 246, .95), transparent 66%),
+    radial-gradient(74% 46% at 50% 99%, rgba(104, 86, 68, .20), transparent 72%),
+    radial-gradient(60% 50% at 50% 30%, rgba(168, 90, 36, .10), transparent 74%),
+    linear-gradient(186deg, #F8F4ED 0%, #F1EBE2 50%, #E2D9CE 100%);
+}
+/* Viñeta: cierra los bordes y evita el gris plano */
+.plato::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 130px rgba(58, 46, 36, .13),
+              inset 0 -60px 90px -70px rgba(40, 32, 25, .55);
 }
 .plato img {
   width: 100%;
@@ -410,13 +448,14 @@ html.menu-abierto { overflow: hidden; }
 }
 
 /* Recorte vertical para el detalle de la madera */
-.plato--retrato { aspect-ratio: 4 / 5; }
+.plato--retrato { aspect-ratio: 4 / 5; --zoom: 1.34; }
+@media (min-width: 900px) { .plato--retrato { --zoom: 1.62; } }
 .plato--retrato img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 26%;
-  transform: scale(1.34);
+  object-position: center 21%;
+  transform: scale(var(--zoom));
   /* Acá el render cubre todo el marco: no hace falta desvanecer nada. */
   -webkit-mask-image: none;
           mask-image: none;
@@ -436,6 +475,9 @@ html.menu-abierto { overflow: hidden; }
   --acento: var(--brasa-clara);
   --linea: rgba(239, 234, 226, .28);
   --foco: var(--brasa-clara);
+  background:
+    radial-gradient(90% 70% at 22% 18%, #241F19 0%, transparent 62%),
+    var(--tinta);
   padding-top: var(--alto-cab);
 }
 
@@ -463,7 +505,7 @@ html.menu-abierto { overflow: hidden; }
 
 @media (min-width: 900px) {
   .hero {
-    grid-template-columns: 1.04fr .96fr;
+    grid-template-columns: 1.12fr 1fr;
     min-height: 100vh;
     min-height: 100svh;
   }
@@ -472,9 +514,41 @@ html.menu-abierto { overflow: hidden; }
 
 
 /* ============================================================
+   08b. FRANJA DE MARCA
+   ============================================================ */
+.franja {
+  --fondo: var(--hueso-2);
+  --texto: var(--oscuro);
+  --tenue: var(--oscuro-tenue);
+  --linea: rgba(20, 18, 15, .16);
+  --foco: var(--brasa-oscura);
+  background:
+    radial-gradient(120% 90% at 50% 0%, #EDE6DC 0%, var(--hueso-2) 70%),
+    var(--hueso-2);
+  color: var(--texto);
+  padding-block: clamp(52px, 7vw, 92px);
+}
+.franja__grilla { display: grid; gap: clamp(34px, 4vw, 56px); }
+.franja__item { padding-top: 26px; border-top: 1px solid var(--laton-2); }
+.franja__item h2 {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.16;
+  margin-bottom: 12px;
+}
+.franja__item p { color: var(--tenue); font-size: .95rem; max-width: 34ch; }
+
+@media (min-width: 820px) {
+  .franja__grilla { grid-template-columns: repeat(3, 1fr); gap: clamp(36px, 5vw, 80px); }
+}
+
+
+/* ============================================================
    09. COLECCIÓN
    ============================================================ */
 .coleccion {
+  background-image: radial-gradient(110% 50% at 50% 0%, #201C17 0%, transparent 60%);
   --fondo: var(--tinta);
   --texto: var(--claro);
   --tenue: var(--claro-tenue);
@@ -541,7 +615,7 @@ html.menu-abierto { overflow: hidden; }
 
 @media (min-width: 980px) {
   .pieza { grid-template-columns: 1fr 1fr; align-items: stretch; }
-  .pieza__foto { aspect-ratio: auto; min-height: 86vh; }
+  .pieza__foto { aspect-ratio: auto; min-height: 78vh; }
   .pieza--invertida .pieza__foto { order: 2; }
 }
 
@@ -591,6 +665,45 @@ html.menu-abierto { overflow: hidden; }
   color: var(--tenue);
 }
 .origen__texto p + p { margin-top: 22px; }
+
+.sello-bloque {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 32px);
+  margin-top: clamp(38px, 5vw, 58px);
+  padding-top: clamp(30px, 4vw, 42px);
+  border-top: 1px solid var(--linea);
+}
+.sello-bloque p {
+  max-width: 24ch;
+  font-size: .85rem;
+  line-height: 1.7;
+  color: var(--tenue);
+}
+.sello { width: clamp(104px, 13vw, 142px); height: auto; flex: none; }
+.sello__anillo { fill: none; stroke: var(--laton); stroke-width: 1; opacity: .8; }
+.sello__anillo--fino { stroke-width: .6; opacity: .45; }
+.sello__punto { fill: var(--laton); opacity: .8; }
+.sello__aro {
+  font-family: var(--sans);
+  font-size: 9.2px;
+  font-weight: 500;
+  letter-spacing: 1.25px;
+  fill: var(--laton);
+}
+.sello__cifra {
+  font-family: var(--display);
+  font-size: 31px;
+  font-weight: 400;
+  fill: var(--texto);
+}
+.sello__pie {
+  font-family: var(--sans);
+  font-size: 7.4px;
+  font-weight: 500;
+  letter-spacing: 2.4px;
+  fill: var(--tenue);
+}
 
 .origen__detalle figcaption {
   margin-top: 18px;
@@ -750,7 +863,9 @@ html.menu-abierto { overflow: hidden; }
   --acento: var(--brasa-clara);
   --linea: rgba(239, 234, 226, .18);
   --foco: var(--brasa-clara);
-  background: var(--tinta);
+  background:
+    radial-gradient(110% 100% at 50% 0%, #1C1914 0%, var(--tinta) 70%),
+    var(--tinta);
   color: var(--texto);
   border-top: 1px solid var(--linea);
   padding-block: clamp(48px, 6vw, 76px);
@@ -801,7 +916,7 @@ html.menu-abierto { overflow: hidden; }
 .js .plato[data-revelar].es-visible img,
 .js [data-revelar].es-visible .plato img { transform: scale(1.01); }
 .js .plato--retrato[data-revelar].es-visible img,
-.js [data-revelar].es-visible .plato--retrato img { transform: scale(1.34); }
+.js [data-revelar].es-visible .plato--retrato img { transform: scale(var(--zoom)); }
 
 .pieza:hover .plato img { transform: scale(1.045); }
 

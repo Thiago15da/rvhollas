@@ -109,7 +109,7 @@ grep -rn "RVH Ollas" index.html js/main.js
 | 3 | `index.html` | 17 | `<meta property="og:title">` — título al compartir el link |
 | 4 | `index.html` | 22 | `<meta property="og:site_name">` — nombre del sitio en redes |
 | 5 | `index.html` | 47 | logo tipográfico del **header** (`.marca__texto`) |
-| 6 | `index.html` | 384 | logo tipográfico del **footer** (`.pie__marca`) |
+| 6 | `index.html` | 433 | logo tipográfico del **footer** (`.pie__marca`) |
 | 7 | `js/main.js` | 21 | `CONFIG.marca` — nombre que aparece en los mensajes de WhatsApp |
 
 Cambiando esos siete valores la marca queda renombrada en todo el sitio. No hay
@@ -134,7 +134,7 @@ El favicon también es propio: un SVG inline en el `<link rel="icon">` del
 |---------|--------------|
 | `olla-tapa.png` | imagen principal del hero y de la ficha de la olla |
 | `olla.png` | segunda vista de la olla (galería) |
-| `grill.png` | ficha del grill rectangular |
+| `grill.png` | plancha del grill rectangular |
 
 > ⚠️ **Los renders que están hoy en el repo son provisorios.** Se generaron para
 > poder armar y revisar el diseño. Reemplazalos por los renders 3D definitivos
@@ -182,6 +182,20 @@ Las tipografías se cargan en una sola etiqueta `<link>` del `<head>`:
 **Cormorant Garamond** para los títulos y **Jost** para el texto y las
 versalitas. Se cambian ahí y en las variables `--display` y `--sans`.
 
+Tres recursos sostienen el aire premium, por si hace falta tocarlos:
+
+- **Grano.** `body::after` proyecta un ruido finísimo (SVG inline) sobre toda
+  la página, al 4,8% de opacidad. Le saca el plano digital a los fondos. Se
+  apaga cambiando `opacity` a `0`.
+- **Platos.** `.plato` no es un color plano: son tres degradados superpuestos
+  (foco de luz arriba, sombra de piso abajo, calor cobre al centro) más una
+  viñeta en `.plato::after`. Es lo que hace que el render se lea como foto de
+  estudio y no como imagen pegada.
+- **Sello.** El emblema "100% PARAGUAYA" es SVG inline dentro de `index.html`
+  (sección Origen), con el texto sobre dos arcos: `#sello-arriba` va en
+  sentido horario y `#sello-abajo` al revés, para que ninguno de los dos
+  quede cabeza abajo. Los colores salen de `--laton` y `--laton-2`.
+
 ---
 
 ## Decisiones que conviene conocer
@@ -200,8 +214,13 @@ versalitas. Se cambian ahí y en las variables `--display` y `--sans`.
   todas tienen `width` y `height` para que no salte el layout.
 - **Mobile first**: probado de 360 px hasta 1920 px, sin scroll horizontal en
   ningún ancho.
-- **Sin precios ni fichas técnicas**: el sitio no muestra precios ni pesos ni
+- **Sin precios ni fichas técnicas**: el sitio no muestra precios, pesos ni
   medidas; todo lleva a consultar por WhatsApp.
+- **Producción 100% paraguaya**: el mensaje aparece en cuatro lugares, que es
+  donde conviene tocarlo si cambia la formulación — la volanta del hero
+  (`index.html` línea 86), la franja de marca debajo del hero (línea 115), la
+  sección Origen (línea 238) y el pie (línea 434). El sello gráfico refuerza
+  lo mismo sin repetir texto.
 - **La colección puede crecer**: no hay nada en los textos que dé a entender que
   son solo dos piezas. Para sumar una, copiá un bloque `<article class="pieza">`
   en `index.html`, alterná la clase `pieza--invertida` para que la foto cambie
