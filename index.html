@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Favicon SVG inline, sin archivo externo -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FBF9F6'/%3E%3Cpath d='M16 28h32v11c0 7.2-5.8 13-13 13h-6c-7.2 0-13-5.8-13-13V28z' fill='%2333302C'/%3E%3Crect x='11' y='23.5' width='42' height='5' rx='2.5' fill='%23A85A24'/%3E%3Crect x='29' y='14' width='6' height='6' rx='3' fill='%238A5A38'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FBF9F6'/%3E%3Cpath d='M18 16 L32 44 L46 16' fill='none' stroke='%2333302C' stroke-width='6.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='54' r='3.2' fill='%23A85A24'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,9 +42,13 @@
      ============================================================ -->
 <header class="cab" id="cab">
   <div class="cab__barra">
-    <a class="marca" href="#inicio" aria-label="Ir al inicio">
-      <!-- MARCA 5/7 · logo tipográfico -->
-      <span class="marca__texto">Venzano</span>
+    <a class="marca lockup" href="#inicio" aria-label="Ir al inicio">
+      <svg class="lockup__v" viewBox="14 4 120 153" aria-hidden="true" focusable="false">
+        <path d="M26 16 L74 118 L122 16"/>
+        <circle cx="74" cy="146" r="7"/>
+      </svg>
+      <!-- MARCA 5/7 · nombre de la marca -->
+      <span class="lockup__texto">Venzano</span>
     </a>
 
     <nav class="nav" aria-label="Navegación principal">
@@ -83,7 +87,7 @@
        ============================================================ -->
   <section class="hero" id="inicio">
     <div class="hero__texto">
-      <p class="etiqueta" data-revelar>Hierro fundido · Producción 100% paraguaya</p>
+      <p class="etiqueta" data-revelar>Producción 100% paraguaya</p>
       <h1 class="display hero__titulo" data-revelar>Hierro fundido<br>para toda una vida</h1>
       <p class="hero__bajada" data-revelar>
         Piezas fundidas y terminadas a mano en Paraguay. Van de la hornalla
@@ -484,8 +488,14 @@
      ============================================================ -->
 <footer class="pie">
   <div class="contenedor pie__grilla">
-    <!-- MARCA 6/7 · logo tipográfico del pie -->
-    <p class="marca__texto pie__marca">Venzano</p>
+    <p class="lockup pie__marca">
+      <svg class="lockup__v" viewBox="14 4 120 153" aria-hidden="true" focusable="false">
+        <path d="M26 16 L74 118 L122 16"/>
+        <circle cx="74" cy="146" r="7"/>
+      </svg>
+      <!-- MARCA 6/7 · nombre de la marca en el pie -->
+      <span class="lockup__texto">Venzano</span>
+    </p>
     <p class="pie__lema">Producción 100% paraguaya</p>
     <nav class="pie__nav" aria-label="Enlaces del pie">
       <a href="#coleccion">Colección</a>

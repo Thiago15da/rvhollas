@@ -109,20 +109,36 @@ grep -rn "Venzano" index.html js/main.js
 | 2 | `index.html` | 11 | `<meta name="description">` — descripción para buscadores |
 | 3 | `index.html` | 17 | `<meta property="og:title">` — título al compartir el link |
 | 4 | `index.html` | 22 | `<meta property="og:site_name">` — nombre del sitio en redes |
-| 5 | `index.html` | 47 | logo tipográfico del **header** (`.marca__texto`) |
-| 6 | `index.html` | 488 | logo tipográfico del **footer** (`.pie__marca`) |
+| 5 | `index.html` | 51 | nombre en el logo del **header** (`.lockup__texto`) |
+| 6 | `index.html` | 497 | nombre en el logo del **footer** (`.lockup__texto`) |
 | 7 | `js/main.js` | 21 | `CONFIG.marca` — nombre que aparece en los mensajes de WhatsApp |
 
 Cambiando esos siete valores la marca queda renombrada en todo el sitio. No hay
 nombre escondido en el CSS ni en los textos de las secciones.
 
-**El logo es tipográfico**, no una imagen: es el nombre en Cormorant Garamond,
-en mayúsculas y con mucho espaciado entre letras (`.marca__texto`). Por eso un
-nombre nuevo entra sin rehacer ningún archivo gráfico. Si el nombre nuevo es
-bastante más largo, ajustá `font-size` o `letter-spacing` en `.marca__texto`
-dentro de `css/styles.css`.
+**El logo son dos cosas: la V y el nombre.** No hay archivo de imagen, es SVG
+inline dentro de `index.html`, así que no pesa ni suma pedidos al servidor y
+toma los colores del CSS:
 
-El favicon también es propio: un SVG inline en el `<link rel="icon">` del
+```html
+<svg class="lockup__v" viewBox="14 4 120 153" aria-hidden="true" focusable="false">
+  <path d="M26 16 L74 118 L122 16"/>
+  <circle cx="74" cy="146" r="7"/>
+</svg>
+```
+
+El trazo usa `currentColor` y el punto va en `--cobre`; el tamaño se controla
+con `height` en `.lockup__v` (está en `em`, así que acompaña al nombre). El
+mismo bloque aparece dos veces, en el header y en el pie.
+
+> ⚠️ **La V es la inicial de Venzano.** Si alguna vez cambia el nombre, los 7
+> lugares de la tabla no alcanzan: también hay que rehacer la V, en los dos
+> bloques de `index.html` y en el favicon.
+
+El nombre va en **Jost**, en caja alta y baja, al lado de la V. El logo **no
+lleva bajada**: ni "fundición" ni "hierro fundido", solo Venzano.
+
+El favicon repite la misma V: un SVG inline en el `<link rel="icon">` del
 `<head>`, sin archivo externo.
 
 ---
