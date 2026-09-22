@@ -1,5 +1,5 @@
 /* ============================================================================
-   RVH Ollas · main.js
+   Venzano · main.js
    ----------------------------------------------------------------------------
    01. CONFIG — datos editables del sitio
    02. WhatsApp e Instagram
@@ -18,7 +18,7 @@
 const CONFIG = {
   whatsapp: "595XXXXXXXXX",  // número completo, solo dígitos, con código de país (595)
   instagram: "#",            // URL completa del perfil
-  marca: "RVH Ollas"         // MARCA 7/7 · nombre usado en los mensajes de WhatsApp
+  marca: "Venzano"           // MARCA 7/7 · nombre usado en los mensajes de WhatsApp
 };
 
 

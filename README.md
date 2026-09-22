@@ -1,15 +1,15 @@
-# RVH Ollas — sitio provisorio
+# Venzano — sitio
 
-Sitio de una sola página para **RVH Ollas**, una línea de utensilios de cocina de
-hierro fundido fabricados en Paraguay.
+Sitio de una sola página para **Venzano**, una línea de utensilios de cocina de
+hierro fundido de producción 100% paraguaya.
 
 Hecho con HTML, CSS y JavaScript vanilla. Sin frameworks, sin npm, sin bundlers
 y sin paso de compilación: funciona abriendo `index.html` y funciona publicado en
 GitHub Pages. El único recurso externo son las tipografías de Google Fonts
 (Cormorant Garamond y Jost).
 
-> **El nombre es provisorio.** Está pensado para cambiarse en 7 lugares
-> marcados con el comentario `MARCA`. Ver [Renombrar la marca](#renombrar-la-marca).
+> **El nombre se cambia en 7 lugares**, todos marcados con el comentario
+> `MARCA`. Ver [Renombrar la marca](#renombrar-la-marca).
 
 ---
 
@@ -71,7 +71,7 @@ principio de **`js/main.js`**.
 const CONFIG = {
   whatsapp: "595XXXXXXXXX",  // número completo, solo dígitos, con código de país (595)
   instagram: "#",            // URL completa del perfil
-  marca: "RVH Ollas"         // MARCA 7/7 · nombre usado en los mensajes de WhatsApp
+  marca: "Venzano"           // MARCA 7/7 · nombre usado en los mensajes de WhatsApp
 };
 ```
 
@@ -79,11 +79,12 @@ const CONFIG = {
   guiones y sin el 0 inicial. Por ejemplo, para `0981 123 456` se escribe
   `"595981123456"`.
 - **`instagram`**: la URL completa del perfil, por ejemplo
-  `"https://instagram.com/rvhollas"`. Mientras quede en `"#"`, los enlaces de
+  `"https://instagram.com/venzano"`. Mientras quede en `"#"`, los enlaces de
   Instagram no llevan a ningún lado.
 
-Con eso alcanza: los tres botones "Consultar por WhatsApp", el botón del hero, el
-enlace de la sección Contacto y el formulario arman solos el mensaje.
+Con eso alcanza: los cinco botones "Consultar por WhatsApp" (uno por pieza), el
+botón del hero, el enlace de la sección Contacto y el formulario arman solos el
+mensaje, cada uno con el nombre de la pieza que corresponde.
 
 > **Mientras el número siga siendo el placeholder `595XXXXXXXXX`**, los botones
 > de WhatsApp llevan al formulario de contacto en vez de abrir un chat roto, y el
@@ -99,7 +100,7 @@ El nombre aparece en **7 lugares**, todos marcados con un comentario `MARCA n/7`
 para encontrarlos rápido:
 
 ```bash
-grep -rn "RVH Ollas" index.html js/main.js
+grep -rn "Venzano" index.html js/main.js
 ```
 
 | # | Archivo | Línea | Qué es |
@@ -109,7 +110,7 @@ grep -rn "RVH Ollas" index.html js/main.js
 | 3 | `index.html` | 17 | `<meta property="og:title">` — título al compartir el link |
 | 4 | `index.html` | 22 | `<meta property="og:site_name">` — nombre del sitio en redes |
 | 5 | `index.html` | 47 | logo tipográfico del **header** (`.marca__texto`) |
-| 6 | `index.html` | 433 | logo tipográfico del **footer** (`.pie__marca`) |
+| 6 | `index.html` | 488 | logo tipográfico del **footer** (`.pie__marca`) |
 | 7 | `js/main.js` | 21 | `CONFIG.marca` — nombre que aparece en los mensajes de WhatsApp |
 
 Cambiando esos siete valores la marca queda renombrada en todo el sitio. No hay
@@ -128,13 +129,16 @@ El favicon también es propio: un SVG inline en el `<link rel="icon">` del
 
 ## Las imágenes
 
-`img/` tiene tres renders, todos de 1200 × 900 px sobre fondo claro:
+`img/` tiene seis renders, todos de 1200 × 900 px sobre fondo claro:
 
 | Archivo | Dónde se usa |
 |---------|--------------|
-| `olla-tapa.png` | imagen principal del hero y de la ficha de la olla |
-| `olla.png` | segunda vista de la olla (galería) |
-| `grill.png` | plancha del grill rectangular |
+| `olla-tapa.png` | hero, olla con tapa y detalle del lapacho en Origen |
+| `olla.png` | segunda vista de la olla, sin tapa |
+| `grill.png` | grill rectangular |
+| `cacerola.png` | cacerola ovalada con tapa |
+| `sarten.png` | sartén, visto desde arriba |
+| `cacito.png` | cacito con mango de lapacho |
 
 > ⚠️ **Los renders que están hoy en el repo son provisorios.** Se generaron para
 > poder armar y revisar el diseño. Reemplazalos por los renders 3D definitivos
@@ -155,6 +159,10 @@ Conviene también que mantengan la relación de 4:3, con el producto centrado y
 con aire arriba y abajo (la máscara desvanece el 11% superior e inferior y el
 4,5% de cada lado). Si cambiás la relación de aspecto, actualizá los atributos
 `width` y `height` de los `<img>` en `index.html`.
+
+**Peso:** los placeholders pesan entre 340 y 500 KB cada uno, que es mucho para
+seis imágenes. Al cargar los renders definitivos conviene pasarlos por un
+optimizador (TinyPNG, Squoosh) y dejarlos por debajo de los 300 KB.
 
 La sección **Origen** usa `img/olla-tapa.png` recortada en vertical para mostrar
 el sostén de lapacho de cerca. El recorte se controla con `object-position` y
@@ -232,15 +240,20 @@ Tres recursos sostienen el aire premium, por si hace falta tocarlos:
   franja de marca debajo del hero, la sección Origen y el pie.
   `grep -n "100% paraguaya" index.html` los encuentra a los cuatro. El sello
   gráfico refuerza lo mismo sin repetir texto.
-- **La colección puede crecer**: no hay nada en los textos que dé a entender que
-  son solo dos piezas. Para sumar una, copiá un bloque `<article class="pieza">`
-  en `index.html`, alterná la clase `pieza--invertida` para que la foto cambie
-  de lado, y agregá la opción al `<select>` de contacto.
+- **La colección arranca con cinco piezas**: grill rectangular, olla con tapa,
+  cacerola ovalada, sartén y cacito. No hay nada en los textos que dé a
+  entender que se agote ahí. Para sumar una:
+  1. Poné el render en `img/`, con el mismo criterio de encuadre.
+  2. Copiá un bloque `<article class="pieza">` en `index.html` y alterná la
+     clase `pieza--invertida` para que la foto cambie de lado (los tonos de
+     fondo alternan solos).
+  3. Agregá la opción al `<select>` de la sección Contacto.
+  4. El botón de WhatsApp se arma solo con `data-wa="Nombre de la pieza"`.
 
 ## Qué falta
 
 El sitio está terminado como diseño. Lo que queda por cargar son datos reales:
 
 1. El número de WhatsApp y la URL de Instagram en `CONFIG` (`js/main.js`).
-2. Los renders 3D definitivos en `img/`.
+2. Los renders definitivos en `img/`, con los mismos nombres de archivo.
 3. Repasar los textos de cada pieza con la información final.
