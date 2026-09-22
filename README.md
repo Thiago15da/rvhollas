@@ -6,7 +6,7 @@ hierro fundido fabricados en Paraguay.
 Hecho con HTML, CSS y JavaScript vanilla. Sin frameworks, sin npm, sin bundlers
 y sin paso de compilación: funciona abriendo `index.html` y funciona publicado en
 GitHub Pages. El único recurso externo son las tipografías de Google Fonts
-(Fraunces e Inter).
+(Cormorant Garamond y Jost).
 
 > **El nombre es provisorio.** Está pensado para cambiarse en 7 lugares
 > marcados con el comentario `MARCA`. Ver [Renombrar la marca](#renombrar-la-marca).
@@ -128,7 +128,7 @@ El favicon también es propio: un SVG inline en el `<link rel="icon">` del
 
 ## Las imágenes
 
-`img/` tiene tres renders, todos de 1200 × 900 px con fondo gris claro:
+`img/` tiene tres renders, todos de 1200 × 900 px sobre fondo claro:
 
 | Archivo | Dónde se usa |
 |---------|--------------|
@@ -140,16 +140,21 @@ El favicon también es propio: un SVG inline en el `<link rel="icon">` del
 > poder armar y revisar el diseño. Reemplazalos por los renders 3D definitivos
 > **manteniendo los mismos nombres de archivo**; no hay que tocar el HTML.
 
-Para que no se vea un recorte feo, los renders no van sueltos sobre el fondo ni
-dentro de una tarjeta con borde: ocupan todo el ancho de una superficie clara
-(`.plato`), se funden con `mix-blend-mode: multiply` y se desvanecen hacia
-arriba y hacia abajo con una máscara. El gris del render se mezcla con el crema
-y no queda ningún borde recto a la vista.
+Para que no se vea un recorte feo, los renders no van dentro de una tarjeta:
+ocupan todo el ancho de su columna, se funden con `mix-blend-mode: multiply` y
+se desvanecen en los bordes con una máscara. La pieza queda flotando sobre el
+papel, con su propia sombra, sin ningún rectángulo a la vista.
 
-Conviene que los renders nuevos mantengan el fondo gris claro y una relación de
-4:3, con el producto centrado y con aire arriba y abajo (la máscara desvanece
-más o menos el 13% superior e inferior). Si cambiás la relación de aspecto,
-actualizá los atributos `width` y `height` de los `<img>` en `index.html`.
+**Sobre el fondo de los renders:** cuanto más claro y más cálido, mejor. El
+empalme se vuelve invisible cuando el fondo del render se acerca al `--papel`
+del sitio (`#FBF9F6`). Un gris frío o marcado se va a notar como una mancha
+aunque la máscara suavice los bordes; si los renders definitivos vienen así,
+subí los porcentajes del desvanecido en `.plato img`.
+
+Conviene también que mantengan la relación de 4:3, con el producto centrado y
+con aire arriba y abajo (la máscara desvanece el 11% superior e inferior y el
+4,5% de cada lado). Si cambiás la relación de aspecto, actualizá los atributos
+`width` y `height` de los `<img>` en `index.html`.
 
 La sección **Origen** usa `img/olla-tapa.png` recortada en vertical para mostrar
 el sostén de lapacho de cerca. El recorte se controla con `object-position` y
@@ -163,20 +168,24 @@ en otra posición, ese es el lugar para ajustarlo.
 Toda la paleta está en variables CSS, arriba de todo en `css/styles.css`:
 
 ```css
---tinta:        #14120F   /* negro hierro, cálido            */
---tinta-2:      #1C1915   /* segundo plano oscuro            */
---brasa:        #A85A24   /* cobre-brasa, acento             */
---brasa-clara:  #C2763A   /* acento sobre fondo oscuro       */
---brasa-oscura: #8F4718   /* acento sobre fondo claro        */
---hueso:        #EFEAE2   /* crema cálido, fondos claros     */
---hueso-2:      #E7E0D6   /* crema con más cuerpo            */
---lapacho:      #7A4A2B   /* madera de lapacho, detalles     */
+--papel:       #FBF9F6   /* blanco cálido, fondo base        */
+--arena:       #F3EFE8   /* segundo tono, para alternar      */
+--lino:        #EBE5DB   /* tono más asentado, pie de página */
+--texto:       #33302C   /* gris cálido, nunca negro puro    */
+--tenue:       #6E6760   /* texto secundario                 */
+--cobre:       #A85A24   /* acento: botones                  */
+--cobre-texto: #9C4D22   /* acento legible en texto chico    */
+--lapacho:     #8A5A38   /* madera de lapacho, detalles      */
+--laton:       #9A7434   /* sello y filetes                  */
 ```
 
-Cada sección declara si es clara u oscura con las clases `.seccion--clara` y
-`.seccion--oscura`, y a partir de ahí se resuelven solos el color de fondo, el
-de texto, el de acento, las líneas y el color del foco. Para dar vuelta una
-sección alcanza con cambiarle la clase.
+La paleta es clara de punta a punta. El contraste fuerte lo pone el producto,
+que es hierro negro sobre superficies casi blancas; el negro no se usa ni
+siquiera para el texto, porque un negro puro sobre blanco endurece la página.
+
+Cada sección elige su tono con `.seccion--blanca` o `.seccion--arena`, y las
+piezas de la colección alternan solas (`.pieza:nth-of-type(even)`). Para dar
+vuelta una sección alcanza con cambiarle la clase.
 
 Las tipografías se cargan en una sola etiqueta `<link>` del `<head>`:
 **Cormorant Garamond** para los títulos y **Jost** para el texto y las
@@ -185,12 +194,14 @@ versalitas. Se cambian ahí y en las variables `--display` y `--sans`.
 Tres recursos sostienen el aire premium, por si hace falta tocarlos:
 
 - **Grano.** `body::after` proyecta un ruido finísimo (SVG inline) sobre toda
-  la página, al 4,8% de opacidad. Le saca el plano digital a los fondos. Se
-  apaga cambiando `opacity` a `0`.
-- **Platos.** `.plato` no es un color plano: son tres degradados superpuestos
-  (foco de luz arriba, sombra de piso abajo, calor cobre al centro) más una
-  viñeta en `.plato::after`. Es lo que hace que el render se lea como foto de
-  estudio y no como imagen pegada.
+  la página, al 3% de opacidad y en modo `multiply`. Le da textura de papel a
+  los fondos claros. Se apaga cambiando `opacity` a `0`.
+- **Platos.** `.plato` no tiene fondo propio. El render se funde con la sección
+  mediante `mix-blend-mode: multiply` y dos desvanecidos cruzados: mucho arriba
+  y abajo (11%), poco a los lados (4,5%). Así la pieza queda flotando sobre el
+  papel, con su propia sombra, sin ningún rectángulo a la vista. El desvanecido
+  lateral es chico a propósito: uno radial se comía las puntas del grill, que
+  es una pieza ancha.
 - **Sello.** El emblema "100% PARAGUAYA" es SVG inline dentro de `index.html`
   (sección Origen), con el texto sobre dos arcos: `#sello-arriba` va en
   sentido horario y `#sello-abajo` al revés, para que ninguno de los dos
@@ -217,10 +228,10 @@ Tres recursos sostienen el aire premium, por si hace falta tocarlos:
 - **Sin precios ni fichas técnicas**: el sitio no muestra precios, pesos ni
   medidas; todo lleva a consultar por WhatsApp.
 - **Producción 100% paraguaya**: el mensaje aparece en cuatro lugares, que es
-  donde conviene tocarlo si cambia la formulación — la volanta del hero
-  (`index.html` línea 86), la franja de marca debajo del hero (línea 115), la
-  sección Origen (línea 238) y el pie (línea 434). El sello gráfico refuerza
-  lo mismo sin repetir texto.
+  donde conviene tocarlo si cambia la formulación — la volanta del hero, la
+  franja de marca debajo del hero, la sección Origen y el pie.
+  `grep -n "100% paraguaya" index.html` los encuentra a los cuatro. El sello
+  gráfico refuerza lo mismo sin repetir texto.
 - **La colección puede crecer**: no hay nada en los textos que dé a entender que
   son solo dos piezas. Para sumar una, copiá un bloque `<article class="pieza">`
   en `index.html`, alterná la clase `pieza--invertida` para que la foto cambie
