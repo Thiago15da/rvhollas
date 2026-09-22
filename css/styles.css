@@ -267,13 +267,13 @@ p { text-wrap: pretty; }
 .lockup {
   display: inline-flex;
   align-items: center;
-  gap: .58em;
-  font-size: clamp(1.1rem, 1.4vw, 1.32rem);
+  gap: .5em;
+  font-size: clamp(1.25rem, 1.5vw, 1.5rem);
   line-height: 1;
   color: var(--texto);
 }
 .lockup__v {
-  height: 2.12em;
+  height: 1.7em;
   width: auto;
   flex: none;
   overflow: visible;
@@ -281,7 +281,9 @@ p { text-wrap: pretty; }
 .lockup__v path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 15;
+  /* El original de marca viene con trazo 15. A tamaño de header se veía
+     flaco, así que acá va engrosado: es la variante para tamaño chico. */
+  stroke-width: 18;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -290,7 +292,7 @@ p { text-wrap: pretty; }
   font-family: var(--sans);
   font-size: 1em;
   font-weight: 400;
-  letter-spacing: .035em;
+  letter-spacing: .01em;
   white-space: nowrap;
 }
 

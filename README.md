@@ -121,15 +121,22 @@ inline dentro de `index.html`, así que no pesa ni suma pedidos al servidor y
 toma los colores del CSS:
 
 ```html
-<svg class="lockup__v" viewBox="14 4 120 153" aria-hidden="true" focusable="false">
+<svg class="lockup__v" viewBox="12 2 124 150" aria-hidden="true" focusable="false">
   <path d="M26 16 L74 118 L122 16"/>
-  <circle cx="74" cy="146" r="7"/>
+  <circle cx="74" cy="141" r="7.5"/>
 </svg>
 ```
 
 El trazo usa `currentColor` y el punto va en `--cobre`; el tamaño se controla
 con `height` en `.lockup__v` (está en `em`, así que acompaña al nombre). El
 mismo bloque aparece dos veces, en el header y en el pie.
+
+**El trazo va engrosado a propósito.** El archivo de marca original usa
+`stroke-width: 15` y el punto en `cy="138" r="6.5"`, medidas pensadas para
+verse en grande. A tamaño de header la V quedaba flaca y el punto se perdía,
+así que en el sitio va con `stroke-width: 18` y el punto un poco más abajo y
+más grande. Es la variante para tamaño chico; para piezas grandes (packaging,
+cartelería) conviene usar el archivo original.
 
 > ⚠️ **La V es la inicial de Venzano.** Si alguna vez cambia el nombre, los 7
 > lugares de la tabla no alcanzan: también hay que rehacer la V, en los dos
